@@ -7,13 +7,16 @@ module ActiveAdmin
       config = {
         :path => ActiveAdmin.application.default_namespace,
         :controllers => ActiveAdmin::Devise.controllers,
-        :path_names => { :sign_in => 'login', :sign_out => "logout" },
-        :omniauth => { :name => :open_id, :store => ::OpenID::Store::Memory.new}
+        :path_names => { :sign_in => 'login', :sign_out => "logout" }
       }
 
       if ::Devise.respond_to?(:sign_out_via)
         logout_methods = [::Devise.sign_out_via, ActiveAdmin.application.logout_link_method].flatten.uniq
         config.merge!( :sign_out_via => logout_methods)
+      end
+
+      if ::Devise.respond_to?(:omniauth)
+        Devise.omniauth :open_id, :store => ::OpenID::Store::Memory.new
       end
 
       config
