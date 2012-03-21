@@ -7,7 +7,8 @@ module ActiveAdmin
       config = {
         :path => ActiveAdmin.application.default_namespace,
         :controllers => ActiveAdmin::Devise.controllers,
-        :path_names => { :sign_in => 'login', :sign_out => "logout" }
+        :path_names => { :sign_in => 'login', :sign_out => "logout" },
+        :omniauth => { :name => :open_id, :store => ::OpenID::Store::Memory.new}
       }
 
       if ::Devise.respond_to?(:sign_out_via)
