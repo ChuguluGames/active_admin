@@ -16,7 +16,7 @@ module ActiveAdmin
       end
 
       if ::Devise.respond_to?(:omniauth)
-        Devise.omniauth :open_id, :store => ::OpenID::Store::Memory.new
+        ::Devise.omniauth :open_id, :store => ::OpenID::Store::Memory.new
       end
 
       config
